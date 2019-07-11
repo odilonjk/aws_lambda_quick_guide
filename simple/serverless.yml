@@ -1,0 +1,11 @@
+service: simple 
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: sa-east-1
+
+functions:
+  hello:
+    handler: handler.hello
