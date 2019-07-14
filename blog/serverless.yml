@@ -1,0 +1,15 @@
+service: blog
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: sa-east-1
+
+functions:
+  create_article:
+    handler: articles/create.create_article
+    events:
+      - http:
+          path: article
+          method: post
+          cors: true
