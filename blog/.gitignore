@@ -15,9 +15,6 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-.mypy_cache
-simple/.vscode
-blog/.vscode
-blog/.mypy_cache
+
 # Serverless directories
 .serverless
