@@ -13,3 +13,40 @@ functions:
           path: article
           method: post
           cors: true
+  read_article:
+    handler: articles/read.read_article
+    events:
+      - http:
+          path: article
+          method: get
+          cors: true
+  update_article:
+    handler: articles/update.update_article
+    events:
+      - http:
+          path: article
+          method: put
+          cors: true
+  delete_article:
+    handler: articles/delete.delete_article
+    events:
+      - http:
+          path: article
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    BlogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: BlogTable
+        AttributeDefinitions:
+          - AttributeName: article_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: article_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
