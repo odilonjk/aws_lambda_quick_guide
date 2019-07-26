@@ -1,14 +1,19 @@
+import boto3
 import json
 
 
 def read_article(event, context):
-    body = {
-        "title": "How to use AWS Lambda",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo."
-    }
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
+    article_id = event["article_id"]
 
-    return response
+    dynamodb = boto3.client("dynamodb")
+    response = dynamodb.get_item(
+        TableName="BlogTable",
+        Key={
+            "article_id": {"S": str(article_id)}
+        }
+    )
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps(response["Item"])
+    }
